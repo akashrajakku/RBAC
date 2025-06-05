@@ -3,8 +3,8 @@ import express from "express";
 import { User } from "../models/schema.js";
 
 
-export const addEmployee = async(req, res)=>{
-    try {
+export const addEmployee = async (req, res) => {
+  try {
     const { email, username, department } = req.body;
 
     if (!email || !username || !department) {
@@ -43,7 +43,7 @@ export const editEmployee = async (req, res) => {
       return res.status(404).json({ message: 'Employee not found.' });
     }
 
-    
+
     if (updates.email && updates.email !== employee.email) {
       const existingEmail = await User.findOne({ email: updates.email, _id: { $ne: id } });
       if (existingEmail) {
@@ -51,7 +51,7 @@ export const editEmployee = async (req, res) => {
       }
     }
 
-    
+
     if (updates.email !== undefined) employee.email = updates.email;
     if (updates.username !== undefined) employee.username = updates.username;
     if (updates.department !== undefined) employee.department = updates.department;
@@ -107,4 +107,23 @@ export const getEmployee = async (req, res) => {
   }
 };
 
+export const getAnEmployee = async (req, res) => {
+  try {
+    const userId = req.userId;
 
+    const employee = await User.findOne({ _id: userId, role: 'employee', active: 1 }).select("-password");
+
+    if (!employee) {
+      return res.status(404).json({ error: "Active employee not found" });
+    }
+
+    return res.status(200).json({
+      success: true,
+      employee: employee
+    });
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Server error" });
+  }
+};

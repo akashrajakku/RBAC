@@ -59,10 +59,9 @@ export const getUsers = async (req, res) => {
 export const userLogin = async (req, res) => {
     try {
         const { email, password } = req.body;
-        //console.log(`email: ${email}, password: ${password}`);
         
         if (!email || !password) {
-            return res.status(400).json({
+            return res.status(200).json({
                 message: "Fill all details",
                 success: false,
             });
@@ -70,7 +69,7 @@ export const userLogin = async (req, res) => {
 
         let user = await User.findOne({ email });
         if (!user) {
-            return res.status(404).json({
+            return res.status(200).json({
                 success: false,
                 message: "User not found",
             });
@@ -78,7 +77,7 @@ export const userLogin = async (req, res) => {
 
         const validatepassword = await argon2.verify(user.password, password);
         if (!validatepassword) {
-            return res.status(401).json({
+            return res.status(200).json({
                 message: "Incorrect password",
                 success: false,
             });
@@ -133,6 +132,7 @@ export const userSignup = async (req, res) => {
 
         try {
             const user = await User.findOne({ email });
+            
             if (user.password) {
                 return res.status(200).json({
                     message: "User already exists, kindly login",
@@ -163,7 +163,6 @@ export const userSignup = async (req, res) => {
                 return res
                     .cookie("token", token, {
                         sameSite: "strict",
-                        secure: true,
                         maxAge: 1 * 24 * 60 * 60 * 1000,
                     })
                     .json({

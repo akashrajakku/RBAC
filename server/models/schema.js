@@ -63,6 +63,10 @@ const userSchema = mongoose.Schema({
     type: Number, 
     default: 1 
   },
+  password: {
+    type: String,
+    required: false,
+  },
 });
 
 export const User = mongoose.model("User", userSchema);

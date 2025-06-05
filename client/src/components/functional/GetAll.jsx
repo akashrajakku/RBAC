@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import { getAll } from "../../services/api";
+import { getAll, getEmployee , getAnEmployee} from "../../services/api";
 import Heading from "../ui/Heading";
+import UserProfile from "../ui/UserProfile";
 
-function GetAll() {
+function GetAll({roleId}) {
+
   const [users, setUsers] = useState([]);
+  const [employee, setEmployee] = useState(null);
 
   useEffect(() => {
     const fetchAllUsers = async () => {
@@ -15,14 +18,33 @@ function GetAll() {
       }
     };
 
-    fetchAllUsers();
+    const fetchEmployees = async () =>{
+      try {
+        const res = await getEmployee();
+        setUsers(res.data);
+      } catch (error) {
+        console.error("Failed to fetch employees", error);
+      }
+    }
+
+    const fetchAnEmployee = async () =>{
+        try {
+          const response = await getAnEmployee();
+          // console.log(response.data.employee);
+          setEmployee(response.data.employee);
+        } catch (error) {
+          console.error("Failed to fetch employee", error);
+        }
+    }
+
+    roleId === '0' ? fetchAllUsers() : roleId === '1' ? fetchEmployees(): roleId === '2' ? fetchAnEmployee() : <p></p> ;
   }, []);
 
   return (
     <div className="text-white">
-      <Heading label="All-Xcelorians" />
+      {roleId === '0' ? <Heading label="All-Xcelorians" /> : roleId === '1' ? <Heading label="All Employees List"/> : <div></div>}
 
-      <table className="table-auto border-collapse border border-gray-300 w-full">
+      {((roleId === '0' && users) || (roleId === '1' && users)) ? <table className="table-auto border-collapse border border-gray-300 w-full">
         <thead className="py-4">
           <tr>
             <th className="border border-gray-300 px-4 py-2">S. No.</th>
@@ -47,7 +69,12 @@ function GetAll() {
             );
           })}
         </tbody>
-      </table>
+      </table> : <div></div>}
+
+      <div>
+        {employee ? <UserProfile user={employee} /> : <div></div>}
+      </div>
+      
     </div>
   );
 }

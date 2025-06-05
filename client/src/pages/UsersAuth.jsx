@@ -1,18 +1,40 @@
 import { useState } from "react";
 import Heading from "../components/ui/Heading";
 import Input from "../components/ui/Input";
-import { usersAuth } from "../services/api";
+import { usersAuth, usersLogin, usersSignup } from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 function UsersAuthCard() {
   const [authModal, setAuthModal] = useState("");
-  const [email, setEmail] = useState("")
+  const [email, setEmail] = useState("");
+  const[password, setPassword]= useState("");
   const emailRegexPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const navigate = useNavigate();
 
   const userAuthHandler = async () => {
     if (authModal === "exists") {
-        //login-logic
+        const response = await usersLogin(email, password);
+        if(response.data.success){
+            alert(`Login Success`);
+            console.log(response);
+            navigate('/welcome');
+        }else if(response.data.success === false){
+            alert(`${response.data.message}`);
+        }else{
+          alert(`Error Logging In`)
+        }
+        
     } else if (authModal === "absent") {
-        //logic to set password
+       const response = await usersSignup(email, password);
+        if(response.data.success){
+            alert(`Successfully generated password`);
+            navigate('/welcome');
+        }else if(response.data.success === false){
+            alert(`${response.data.message}`);
+        }else{
+          alert(`Error Singing up`)
+        }
     } else {
       try {
         const response = await usersAuth(email);
@@ -60,8 +82,10 @@ function UsersAuthCard() {
                 if (authModal === "not found") setAuthModal("");
               }} />
 
-            {authModal === "exists" && <Input label="Password" placeholder="enter password here" textColor="white" />}
-            {authModal === "absent" && <Input label="Password" placeholder="set your password" textColor="white" />}
+            {authModal === "exists" && <Input label="Password" placeholder="enter password here" textColor="white" value={password} onChange={(e)=> setPassword(e.target.value)}/>}
+
+            {authModal === "absent" && <Input label="Password" placeholder="set your password" textColor="white" value={password} onChange={(e)=> setPassword(e.target.value)}/>}
+
             {authModal === "not found" && <p className="border border-gray-600 text-center px-1.5 py-2 font-medium w-[70%] ml-16 text-gray-400 rounded-xl">User not found. Contact your admin.</p>}
 
             <button

@@ -15,7 +15,7 @@ const Input = ({label, type = 'text', name, placeholder = '', value, onChange, t
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className={`px-3 py-2 border border-${textColor} rounded-md focus:outline-none p-2  focus:ring-${textColor} placeholder-gray-400`}
+        className={`px-3 py-2 w-full border border-${textColor} text-${textColor} rounded-md focus:outline-none p-2  focus:ring-${textColor} placeholder-gray-400`}
       />
 
     </div>

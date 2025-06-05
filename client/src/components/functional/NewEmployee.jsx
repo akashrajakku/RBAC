@@ -3,6 +3,7 @@ import Input from "../ui/Input"
 import { useState } from "react";
 import { addEmployee } from "../../services/api";
 
+
 function NewEmployee() {
   const [employeeData, setEmployeeData] = useState({
       email: "",
@@ -17,12 +18,18 @@ function NewEmployee() {
   const addEmployeeHandler = async()=>{
      const employee = await addEmployee(employeeData);     
      alert('employee created');
-     return employee;
+     setEmployeeData({
+      email: "",
+      username:"",
+      department:"",
+    });
+    return employee;
   }
  
 
   return (
-    <div className="w-1/2 m-auto mt-24 p-2 bg-white">
+    <div className="w-1/3 mx-auto mt-20 p-6 bg-black border border-white rounded-xl">
+      
        <Input 
             label="Email" 
             type = 'email'
@@ -30,6 +37,7 @@ function NewEmployee() {
             placeholder = 'e.g. employee1@gmail.com'
             value = {employeeData.email}
             onChange={onChangeHandler}
+            textColor="white"
         />
 
       <Input 
@@ -38,6 +46,7 @@ function NewEmployee() {
             placeholder = 'e.g. Rahul Raj'
             value = {employeeData.username}
             onChange={onChangeHandler}
+            textColor="white"
         />
 
       <Input 
@@ -46,9 +55,10 @@ function NewEmployee() {
             placeholder = 'e.g. marketing'
             value = {employeeData.department}
             onChange={onChangeHandler}
+            textColor="white" 
         />
 
-      <div className="w-full flex justify-center items-center" onClick={addEmployeeHandler}><Button label="Add Employee"/></div>
+      <div className="w-full flex justify-center items-center mt-2" onClick={addEmployeeHandler}><Button label="Add Employee"/></div>
     </div>
   )
 }

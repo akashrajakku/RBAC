@@ -46,24 +46,15 @@ export default function StylishSignupForm() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 flex items-center justify-center p-4">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-10 -left-10 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
-        <div className="absolute -bottom-10 -right-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse delay-75"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse delay-150"></div>
-      </div>
 
       <div className="relative">
-        {/* Main form container */}
+       
         <div
           className="relative bg-white/80 backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl w-full max-w-md mx-auto p-8 space-y-6 hover:shadow-3xl transition-all duration-300"
         >
-          {/* Header */}
+         
           <div className="text-center space-y-2">
             <div className="flex justify-center">
-              <div className="bg-gradient-to-r from-purple-500 to-pink-500 p-3 rounded-2xl">
-                <Sparkles className="w-8 h-8 text-white" />
-              </div>
             </div>
             <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
               Create Account
@@ -71,7 +62,7 @@ export default function StylishSignupForm() {
             <p className="text-gray-600">Join us and start your journey</p>
           </div>
 
-          {/* Username field */}
+          
           <div className="relative group">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <User className={`w-5 h-5 transition-colors duration-200 ${
@@ -92,7 +83,7 @@ export default function StylishSignupForm() {
             />
           </div>
 
-          {/* Email field */}
+          
           <div className="relative group">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <Mail className={`w-5 h-5 transition-colors duration-200 ${
@@ -142,11 +133,9 @@ export default function StylishSignupForm() {
           >
             <span className="flex items-center justify-center space-x-2 hover:cursor-pointer">
               <span>Create Account</span>
-              <Sparkles className="w-4 h-4" />
             </span>
           </button>
 
-          {/* Login link */}
           <button
             className="w-full text-center py-3 px-4 text-gray-600 hover:text-purple-600 transition-colors duration-200 text-sm font-medium"
           >
@@ -156,22 +145,7 @@ export default function StylishSignupForm() {
             </span>
           </button>
 
-          {/* Terms and conditions */}
-          <p className="text-xs text-gray-500 text-center leading-relaxed">
-            By creating an account, you agree to our{' '}
-            <a href="#" className="text-purple-600 hover:text-purple-700 underline">
-              Terms of Service
-            </a>{' '}
-            and{' '}
-            <a href="#" className="text-purple-600 hover:text-purple-700 underline">
-              Privacy Policy
-            </a>
-          </p>
         </div>
-
-        {/* Floating elements */}
-        <div className="absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full opacity-80 animate-bounce delay-300"></div>
-        <div className="absolute -bottom-4 -left-4 w-8 h-8 bg-gradient-to-r from-green-400 to-blue-400 rounded-full opacity-80 animate-bounce delay-700"></div>
       </div>
     </div>
   );

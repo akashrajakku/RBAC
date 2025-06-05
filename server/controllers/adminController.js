@@ -81,14 +81,13 @@ export const login = async (req, res) => {
       });
     }
     const token = jwt.sign({ userId:
-      Admin._id }, process.env.JWT_SECRET, {
+      admin._id }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });
 
     return res
       .cookie("token", token, {
         sameSite: "strict",
-        secure: true,
         maxAge: 1 * 24 * 60 * 60 * 1000,
       })
       .json({
