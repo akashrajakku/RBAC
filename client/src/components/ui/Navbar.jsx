@@ -3,7 +3,7 @@
 function Navbar({ setActiveTab, setManagerActivity, setEmployeeActivity, showManagers=true, showEmployees=true, showAll=true}) {
     
     return (
-        <div className="w-full text-white flex justify-evenly p-3  border-gray-700">
+        <div className="w-full text-black flex justify-evenly p-3  border-gray-700">
             {
                 showManagers &&
                 <div className="flex justify-center items-center gap-1.5 relative group hover:cursor-pointer">

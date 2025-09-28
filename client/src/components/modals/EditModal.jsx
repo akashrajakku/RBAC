@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import {editEmployee, editManager} from '../../services/api';
+import {editEmployee} from '../../services/employee/api';
+import { editManager } from '../../services/manager/api';
 
 export default function EditModal({ user, isOpen, onClose }) {
   const [formData, setFormData] = useState({
@@ -72,7 +73,7 @@ export default function EditModal({ user, isOpen, onClose }) {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="mt-1 p-2 w-full border border-white rounded-xl"
+              className="mt-1 p-2 w-full border border-white rounded-xl text-white"
             />
           </div>
           <div>
@@ -82,7 +83,7 @@ export default function EditModal({ user, isOpen, onClose }) {
               name="username"
               value={formData.username}
               onChange={handleChange}
-              className="mt-1 p-2 w-full border border-white rounded-xl"
+              className="mt-1 p-2 w-full border border-white rounded-xl text-white"
             />
           </div>
           <div>
@@ -92,7 +93,7 @@ export default function EditModal({ user, isOpen, onClose }) {
               name="department"
               value={formData.department}
               onChange={handleChange}
-              className="mt-1 p-2 w-full border border-white rounded-xl"
+              className="mt-1 p-2 w-full border border-white rounded-xl text-white"
             />
           </div>
 
@@ -100,13 +101,13 @@ export default function EditModal({ user, isOpen, onClose }) {
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-xl border bg-black hover:cursor-pointer hover:bg-gray-950"
+              className="px-4 py-2 rounded-xl border bg-black hover:cursor-pointer hover:bg-gray-950 text-white"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-2 rounded-xl bg-black border border-white hover:bg-gray-950 hover:cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-black border border-white hover:bg-gray-950 hover:cursor-pointer text-white"
             >
               Save
             </button>

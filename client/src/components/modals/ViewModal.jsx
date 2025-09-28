@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 export default function ViewModal({ user, isOpen, onClose }) {
   if (!isOpen || !user) return null;

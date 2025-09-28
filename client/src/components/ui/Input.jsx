@@ -3,7 +3,7 @@ const Input = ({label, type = 'text', name, placeholder = '', value, onChange, t
   return (
     <div className={`flex flex-col gap-1 p-3`}>
       {label && (
-        <label htmlFor={name} className={`text-sm font-medium text-${textColor}`}>
+        <label htmlFor={name} className={`text-sm font-medium text-${textColor} mb-1`}>
           {label}
         </label>
       )}

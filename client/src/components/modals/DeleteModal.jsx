@@ -1,33 +1,34 @@
 
-import { deleteEmployee, deleteManager } from '../../services/api';
+import { deleteEmployee } from '../../services/employee/api';
+import { deleteManager } from '../../services/manager/api';
 
 export default function DeleteModal({ user, isOpen, onClose }) {
 
   console.log(user);
-  
+
 
   const handleDelete = async () => {
-    
-    if (!user || !user._id) {
-    alert("No user selected for deletion.");
-    return;
-  }
 
-    const {roleId} = user;
+    if (!user || !user._id) {
+      alert("No user selected for deletion.");
+      return;
+    }
+
+    const { roleId } = user;
 
     try {
-      if(roleId === 1){
-          await deleteManager(user._id);
-          alert('Manager deleted successfully');
-          onClose(); 
+      if (roleId === 1) {
+        await deleteManager(user._id);
+        alert('Manager deleted successfully');
+        onClose();
       }
 
-      else if(roleId === 2){
-          await deleteEmployee(user._id);
-          alert('Employee deleted successfully');
-          onClose(); 
+      else if (roleId === 2) {
+        await deleteEmployee(user._id);
+        alert('Employee deleted successfully');
+        onClose();
       }
-      
+
     } catch (error) {
       console.error(error);
       alert(`Failed to delete ${user.role}`);
@@ -46,7 +47,7 @@ export default function DeleteModal({ user, isOpen, onClose }) {
         <div className="flex justify-end gap-2">
           <button
             onClick={onClose}
-            className="px-4 py-2 rounded-xl border border-black bg-black hover:bg-green-800 hover:cursor-pointer"
+            className="px-4 py-2 rounded-xl border border-black bg-black hover:bg-green-800 hover:cursor-pointer text-white"
           >
             Cancel
           </button>

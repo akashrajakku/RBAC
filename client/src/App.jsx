@@ -1,11 +1,10 @@
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import Home from "./pages/home/Home";
+import Login from "./pages/auth/Login";
+import Signup from "./pages/auth/Signup";
 import ProtectedAdmin from "./components/functional/ProtectedAdmin";
-import UsersAuth from "./pages/UsersAuth";
+import UsersAuth from "./pages/auth/UsersAuth";
 
 const App = () => {
   return (
